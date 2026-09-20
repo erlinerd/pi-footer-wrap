@@ -9,9 +9,9 @@ import {
   layoutStats,
   sanitizeStatusText,
   wrapStatuses,
-} from "../lib/footer.mjs";
+} from "../lib/footer";
 
-const noColor = (t) => t;
+const noColor = (t: string): string => t;
 
 test("formatTokens matches pi default compaction", () => {
   assert.equal(formatTokens(999), "999");
@@ -66,6 +66,7 @@ test("collectUsage sums assistant/toolResult/compaction usage", () => {
   assert.equal(t.cacheWrite, 100);
   assert.ok(Math.abs(t.cost - 0.015) < 1e-9);
   // last prompt = 100+300+100 = 500 → 300/500 = 60%
+  assert.ok(t.latestCacheHitRate !== undefined);
   assert.ok(Math.abs(t.latestCacheHitRate - 60) < 1e-9);
 });
 
@@ -102,8 +103,8 @@ test("buildStatsParts orders parts like the default footer", () => {
 });
 
 test("buildStatsParts colorizes context thresholds", () => {
-  const levels = [];
-  const colorize = (text, level) => {
+  const levels: (string | undefined)[] = [];
+  const colorize = (text: string, level?: string): string => {
     levels.push(level);
     return text;
   };

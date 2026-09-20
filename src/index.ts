@@ -17,7 +17,7 @@ import {
   layoutStats,
   sanitizeStatusText,
   wrapStatuses,
-} from "../lib/footer.mjs";
+} from "../lib/footer";
 
 function wrapToLines(text: string, width: number): string[] {
   if (visibleWidth(text) <= width) return [text];

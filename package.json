@@ -15,7 +15,7 @@
     ]
   },
   "scripts": {
-    "test": "node --test test/*.test.mjs"
+    "test": "tsx --test test/*.test.ts"
   },
   "engines": {
     "node": ">=20"
@@ -43,6 +43,7 @@
   },
   "devDependencies": {
     "@types/node": "^26.6.2",
+    "tsx": "^4.23.14",
     "typescript": "^7.0.2"
   }
 }

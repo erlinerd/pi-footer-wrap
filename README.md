@@ -38,7 +38,7 @@ pi install /path/to/pi-footer-wrap          # 本地开发
 
 ```bash
 npm install
-npm test        # node --test
+npm test        # tsx --test
 npx tsc --noEmit
 ```
 
