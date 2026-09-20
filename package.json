@@ -1,0 +1,47 @@
+{
+  "name": "pi-footer-wrap",
+  "version": "0.1.0",
+  "description": "Adaptive-wrapping footer for the pi coding agent: takes over the default footer and wraps extension statuses across lines instead of truncating them. No data is dropped.",
+  "type": "module",
+  "files": [
+    "src",
+    "lib",
+    "README.md",
+    "LICENSE"
+  ],
+  "pi": {
+    "extensions": [
+      "./src/index.ts"
+    ]
+  },
+  "scripts": {
+    "test": "node --test test/*.test.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "keywords": [
+    "pi-package",
+    "pi",
+    "pi-coding-agent",
+    "extension",
+    "footer",
+    "wrap"
+  ],
+  "license": "MIT",
+  "author": "lei",
+  "homepage": "https://github.com/erlinerd/pi-footer-wrap#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/erlinerd/pi-footer-wrap.git"
+  },
+  "bugs": {
+    "url": "https://github.com/erlinerd/pi-footer-wrap/issues"
+  },
+  "dependencies": {
+    "@earendil-works/pi-tui": "^0.86.0"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.2"
+  }
+}
