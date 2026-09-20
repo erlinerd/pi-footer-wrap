@@ -1,6 +1,6 @@
 {
   "name": "@erlin-ai/pi-footer-wrap",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Adaptive-wrapping footer for the pi coding agent: takes over the default footer and wraps extension statuses across lines instead of truncating them. No data is dropped.",
   "type": "module",
   "files": [
