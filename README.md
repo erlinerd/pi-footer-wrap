@@ -24,7 +24,8 @@ Data sources and formatting mirror the pi 0.85.x default footer field by field (
 ## Install
 
 ```bash
-pi install github:erlinerd/pi-footer-wrap   # GitHub
+pi install github:erlinerd/pi-footer-wrap      # GitHub
+pi install npm:@erlin-ai/pi-footer-wrap     # npm
 pi install /path/to/pi-footer-wrap          # local development
 ```
 

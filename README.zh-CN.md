@@ -24,7 +24,8 @@ pi 默认 footer 把所有扩展状态挤在一行，超出终端宽度就截断
 ## 安装
 
 ```bash
-pi install github:erlinerd/pi-footer-wrap   # GitHub
+pi install github:erlinerd/pi-footer-wrap      # GitHub
+pi install npm:@erlin-ai/pi-footer-wrap     # npm
 pi install /path/to/pi-footer-wrap          # 本地开发
 ```
 
