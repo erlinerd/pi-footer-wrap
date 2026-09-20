@@ -38,12 +38,12 @@
   "bugs": {
     "url": "https://github.com/erlinerd/pi-footer-wrap/issues"
   },
-  "dependencies": {
-    "@earendil-works/pi-tui": "^0.86.0"
-  },
   "devDependencies": {
     "@types/node": "^26.6.2",
     "tsx": "^4.23.14",
     "typescript": "^7.0.2"
+  },
+  "peerDependencies": {
+    "@earendil-works/pi-tui": "*"
   }
 }

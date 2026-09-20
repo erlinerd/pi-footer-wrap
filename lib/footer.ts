@@ -72,9 +72,7 @@ export function sanitizeStatusText(text: unknown): string {
  * assistant messages, toolResult messages carrying usage, branch_summary and
  * compaction entries. Also tracks the latest cache-hit rate (per assistant turn).
  */
-export function collectUsage(
-  entries?: SessionEntryLike[] | null,
-): UsageTotals {
+export function collectUsage(entries?: SessionEntryLike[] | null): UsageTotals {
   const t: UsageTotals = {
     input: 0,
     output: 0,
