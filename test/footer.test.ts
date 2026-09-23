@@ -148,6 +148,30 @@ test("layoutStats moves model to its own line instead of truncating", () => {
   assert.ok(lines[1].trimEnd().endsWith("glm-5.3-flash • max"));
 });
 
+test("layoutStats hard-wraps an over-wide stats line at ultra-narrow width", () => {
+  // Crash regression 2026-09-23: left part measured 49 at width 48; the local
+  // wrap() did String(wrapTextWithAnsi(...)) on a string[] return, joining the
+  // wrapped pieces with "," into a single 49-wide line → pi uncaughtException.
+  const parts = [
+    "↑1.3M",
+    "↓57k",
+    "R5.2M",
+    "CH97.8%",
+    "$1.373",
+    "\x1b[38;2;204;102;102m14.4%/1.0M (auto)\x1b[39m",
+  ];
+  const lines = layoutStats(parts, "(zai-coding-cn) glm-5.3-flash • high", 48);
+  for (const line of lines) {
+    assert.ok(
+      visibleWidth(line) <= 48,
+      `line exceeds width (${visibleWidth(line)} > 48): ${JSON.stringify(line)}`,
+    );
+  }
+  const joined = lines.join("\n");
+  assert.ok(!joined.includes(","), "array-to-string comma corruption");
+  assert.ok(joined.includes("(auto)"), "no data loss");
+});
+
 test("wrapStatuses packs statuses onto fitting lines", () => {
   const lines = wrapStatuses(["aaa", "bbb", "ccc"], 15);
   assert.deepEqual(lines, ["aaa · bbb · ccc"]);

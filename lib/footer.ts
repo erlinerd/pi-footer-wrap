@@ -155,10 +155,13 @@ export function layoutStats(
   if (lw + minPad + rw <= width) {
     return [left + " ".repeat(width - lw - rw) + right];
   }
-  const wrap = (s: string): string[] =>
-    visibleWidth(s) <= width
-      ? [s]
-      : String(wrapTextWithAnsi(s, width)).split("\n");
+  // wrapTextWithAnsi returns string[] (pi-tui utils.d.ts) — never String() it:
+  // Array→String joins with "," and can yield one over-wide line (crash).
+  const wrap = (s: string): string[] => {
+    if (visibleWidth(s) <= width) return [s];
+    const wrapped = wrapTextWithAnsi(s, width);
+    return Array.isArray(wrapped) ? wrapped : String(wrapped).split("\n");
+  };
   if (lw <= width || rw <= width) {
     const leftLines = lw <= width ? [left] : wrap(left);
     const rightLines =
