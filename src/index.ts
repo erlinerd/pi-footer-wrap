@@ -25,6 +25,20 @@ function wrapToLines(text: string, width: number): string[] {
   return Array.isArray(wrapped) ? wrapped : String(wrapped).split("\n");
 }
 
+/** Physical model id of the latest assistant response (what a virtual model routed to). */
+function latestRoutedModel(ctx: any): string | undefined {
+  try {
+    const entries = ctx.sessionManager?.getEntries?.() ?? [];
+    for (let i = entries.length - 1; i >= 0; i--) {
+      const msg = entries[i]?.message;
+      if (msg?.role === "assistant" && msg.model) return String(msg.model);
+    }
+  } catch {
+    // best-effort
+  }
+  return undefined;
+}
+
 export default function (pi: any) {
   let enabled = true;
 
@@ -68,6 +82,14 @@ export default function (pi: any) {
       const level = ctx.thinkingLevel || "off";
       right =
         level === "off" ? `${right} • thinking off` : `${right} • ${level}`;
+    }
+    // A virtual model routes each request; show where the latest response went
+    // (mirrors pi 0.99.x default footer, footer.js:207-211). ExtensionContext
+    // doesn't expose session.routedModel, so read the latest assistant message's
+    // physical model from session entries.
+    const routed = latestRoutedModel(ctx);
+    if (routed && routed !== model?.id) {
+      right += ` → ${routed}`;
     }
     if ((footerData?.getAvailableProviderCount?.() ?? 1) > 1 && model) {
       right = `(${model.provider}) ${right}`;
